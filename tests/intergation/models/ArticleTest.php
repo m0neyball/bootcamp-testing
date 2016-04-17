@@ -2,8 +2,12 @@
 
 use App\Article;
 
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class ArticleTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * @test it fetches trending articles
      */
@@ -19,5 +23,6 @@ class ArticleTest extends TestCase
 
         // Then
         $this->assertEquals($mostPopular->id, $articles->first()->id);
+        $this->assertCount(4, $articles);
     }
 }
