@@ -1,4 +1,5 @@
 <?php
+use App\Order;
 use App\Product;
 
 class OrderTest extends PHPUnit_Framework_TestCase
