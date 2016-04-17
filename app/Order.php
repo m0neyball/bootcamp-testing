@@ -20,4 +20,12 @@ class Order
     {
         return $this->products;
     }
+
+    public function total ()
+    {
+        return array_reduce($this->products, function ($carry, $product) {
+            return $carry += $product->getCost();
+        });
+
+    }
 }
