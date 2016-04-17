@@ -4,6 +4,9 @@ use App\Product;
 
 class OrderTest extends PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Order
+     */
     protected $order;
 
     public function setUp ()
