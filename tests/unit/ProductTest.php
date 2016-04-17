@@ -7,6 +7,6 @@ class ProductTest extends PHPUnit_Framework_TestCase
     {
         $product = new Product('Fallout 4');
 
-        $this->assertEquals('Fallout 4', $product->name());
+        $this->assertEquals('Fallout 4', $product->getName());
     }
 }
