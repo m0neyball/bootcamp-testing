@@ -24,7 +24,7 @@ class Order
     public function total ()
     {
         return array_reduce($this->products, function ($carry, $product) {
-            return $carry += $product->getCost();
+            return $carry + $product->getCost();
         });
 
     }
