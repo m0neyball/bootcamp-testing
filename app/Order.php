@@ -9,4 +9,9 @@ class Order
     {
         $this->products[] = $product;
     }
+
+    public function products ()
+    {
+        return $this->products;
+    }
 }
