@@ -38,11 +38,30 @@ class Team extends Model
         $this->members()->$method($user);
     }
 
+    /**
+     * @param User $user
+     *
+     * @return bool|int
+     *
+     */
     public function remove (User $user)
     {
         return $user->leaveTeam();
     }
 
+    /**
+     * @param $users
+     */
+    public function removeMany ($users)
+    {
+        $this->members ()
+            ->whereIn ('id', $users->pluck ('id'))
+            ->update (['team_id' => null]);
+    }
+
+    /**
+     * @return int
+     */
     public function restart ()
     {
         return $this->members()->update(['team_id' => null]);
