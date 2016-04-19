@@ -14,6 +14,7 @@ class OrderTest extends TestCase
         $product2 = new Product('Pillowcase', 7);
         $order->add ($product1);
         $order->add ($product2);
-        $this->assertEquals (2, count ($order->products ()));
+        // $this->assertEquals (2, count ($order->products ()));
+        $this->assertCount (2, $order->products ());
     }
 }
