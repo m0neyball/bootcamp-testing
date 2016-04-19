@@ -24,6 +24,11 @@ class Team extends Model
 {
     protected $fillable = ['name', 'size'];
 
+    /**
+     * @param $user
+     *
+     * @throws \Exception
+     */
     public function add ($user)
     {
         $this->guardAgainstTooManyMembers ();
@@ -31,6 +36,11 @@ class Team extends Model
         $method = $user instanceof User ? 'save' : 'saveMany';
 
         $this->members()->$method($user);
+    }
+
+    public function remove (User $user)
+    {
+        $user->leaveTeam();
     }
 
     /**
