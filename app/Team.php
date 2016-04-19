@@ -40,7 +40,12 @@ class Team extends Model
 
     public function remove (User $user)
     {
-        $user->leaveTeam();
+        return $user->leaveTeam();
+    }
+
+    public function restart ()
+    {
+        return $this->members()->update(['team_id' => null]);
     }
 
     /**

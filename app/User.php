@@ -33,7 +33,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'team_id'
     ];
 
     /**
@@ -45,8 +45,11 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * @throws \Exception
+     */
     public function leaveTeam ()
     {
-        $this->delete();
+        return $this->update(['team_id' => null]);
     }
 }
