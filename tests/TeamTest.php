@@ -76,9 +76,23 @@ class TeamTest extends TestCase
     {
         $team = factory(Team::class)->create(['size' => 2]);
         $users = factory(User::class, 2)->create();
-
         $team->add($users);
+
         $team->remove($users[0]);
+
+        $this->assertEquals(1, $team->count());
+    }
+
+    /**
+     * @test a team can remove more than one member at once
+     */
+    public function a_team_can_remove_more_than_one_member_at_once ()
+    {
+        $team = factory(Team::class)->create(['size' => 3]);
+        $users = factory(User::class, 3)->create();
+        $team->add($users);
+
+        $team->removeMany($users->slice(0, 2));
 
         $this->assertEquals(1, $team->count());
     }
@@ -90,8 +104,8 @@ class TeamTest extends TestCase
     {
         $team = factory(Team::class)->create(['size' => 2]);
         $users = factory(User::class, 2)->create();
-
         $team->add($users);
+
         $team->restart();
 
         $this->assertEquals(0, $team->count());
