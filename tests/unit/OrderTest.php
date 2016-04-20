@@ -23,6 +23,6 @@ class OrderTest extends PHPUnit_Framework_TestCase
         $order->add($product);
         $order->add($product2);
 
-        $this->assertEquals(2, count($order->prouducts()));
+        $this->assertCount(2, $order->products());
     }
 }
