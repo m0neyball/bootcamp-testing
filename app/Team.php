@@ -11,4 +11,18 @@ class Team extends Model
         'size'
     ];
 
+    public function add($user)
+    {
+        $this->members()->save($user);
+    }
+
+    public function members()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function count()
+    {
+        return $this->members()->count();
+    }
 }
