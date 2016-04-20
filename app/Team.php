@@ -15,9 +15,21 @@ class Team extends Model
         $this->members ()->$method ($user);
     }
 
-    public function remove (User $user)
+    public function remove ($users = null)
     {
-        $user->leaveTeam ();
+        if ($users instanceof User) {
+            return $users->leaveTeam ();
+        }
+        /*
+        $users->each (function ($user) {
+            $user->leaveTeam ();
+        });
+        */
+        $usersId = $users->pluck ('id');
+        $this
+            ->members ()
+            ->whereIn ('id', $usersId)
+            ->update (['team_id' => null]);
     }
 
     public function restart ()
