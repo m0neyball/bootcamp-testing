@@ -3,6 +3,7 @@
 namespace App;
 
 use Exception;
+use Faker\Test\Provider\UserAgentTest;
 use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
@@ -16,8 +17,14 @@ class Team extends Model
     {
         $this->guardAgainstTooManyMember();
 
+        $method =  'saveMany';
+        if($user instanceof User)
+        {
+            $method = 'save';
+        }
 
-        $this->members()->save($user);
+        $this->members()->$method($user);
+
     }
 
     public function members()
