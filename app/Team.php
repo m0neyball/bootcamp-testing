@@ -20,13 +20,18 @@ class Team extends Model
         if ($users instanceof User) {
             return $users->leaveTeam ();
         }
+        $this->removeMany ($users);
+    }
+
+    public function removeMany ($users)
+    {
         /*
         $users->each (function ($user) {
-            $user->leaveTeam ();
+        $user->leaveTeam ();
         });
         */
         $usersId = $users->pluck ('id');
-        $this
+        return $this
             ->members ()
             ->whereIn ('id', $usersId)
             ->update (['team_id' => null]);
