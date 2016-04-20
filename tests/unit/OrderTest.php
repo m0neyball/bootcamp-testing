@@ -12,19 +12,27 @@ use App\Order;
 
 class OrderTest extends PHPUnit_Framework_TestCase
 {
+    protected $order;
+    
+    public function setUp()
+    {
+        $this->order = $this->createOrderWithProducts();
+
+    }
+    
     /** @test */
     function an_order_consists_of_products()
     {
-        $order = $this->createOrderWithProducts();
+       
 
-        $this->assertCount(2, $order->products());
+        $this->assertCount(2, $this->order->products());
     }
     /** @test */
     function an_order_can_determine_the_total_cost_of_all_its_products()
     {
-        $order = $this->createOrderWithProducts();
+       
 
-        $this->assertEquals(66, $order->total());
+        $this->assertEquals(66, $this->order->total());
 
     }
 
