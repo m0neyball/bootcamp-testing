@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
@@ -13,6 +14,9 @@ class Team extends Model
 
     public function add($user)
     {
+        $this->guardAgainstTooManyMember();
+
+
         $this->members()->save($user);
     }
 
@@ -24,5 +28,13 @@ class Team extends Model
     public function count()
     {
         return $this->members()->count();
+    }
+
+    private function guardAgainstTooManyMember()
+    {
+        if($this->count() >= $this->size)
+        {
+            throw new Exception;
+        }
     }
 }
