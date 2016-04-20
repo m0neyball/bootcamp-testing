@@ -46,4 +46,15 @@ class TeamTest extends TestCase
         $user3 = factory (User::class)->create ();
         $team->add ($user3);
     }
+
+    /**
+     * @test
+     */
+    public function a_team_can_add_multiple_members_at_once ()
+    {
+        $team = factory (Team::class)->create ();
+        $users = factory (User::class, 2)->create ();
+        $team->add($users);
+        $this->assertEquals (2, $team->count ());
+    }
 }
