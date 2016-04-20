@@ -2,6 +2,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Mockery\CountValidator\Exception;
 
 class Team extends Model
 {
@@ -9,6 +10,7 @@ class Team extends Model
 
     public function add (User $user)
     {
+        $this->auardAgainstTooManyMembers ();
         $this->members ()->save ($user);
     }
 
@@ -19,6 +21,13 @@ class Team extends Model
 
     public function count ()
     {
-        return $this->members()->count();
+        return $this->members ()->count ();
+    }
+
+    protected function auardAgainstTooManyMembers ()
+    {
+        if ($this->count () >= $this->size) {
+            throw new Exception;
+        }
     }
 }
