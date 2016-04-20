@@ -11,10 +11,8 @@ class Team extends Model
     public function add ($user)
     {
         $this->auardAgainstTooManyMembers ();
-        if ($user instanceof User) {
-            return $this->members ()->save ($user);
-        }
-        $this->members ()->saveMany ($user);
+        $method = $user instanceof User ? 'save' : 'saveMany';
+        $this->members ()->$method ($user);
     }
 
     public function members ()
