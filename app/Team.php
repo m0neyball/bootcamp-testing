@@ -8,10 +8,13 @@ class Team extends Model
 {
     protected $fillable = ['name', 'size'];
 
-    public function add (User $user)
+    public function add ($user)
     {
         $this->auardAgainstTooManyMembers ();
-        $this->members ()->save ($user);
+        if ($user instanceof User) {
+            return $this->members ()->save ($user);
+        }
+        $this->members ()->saveMany ($user);
     }
 
     public function members ()
