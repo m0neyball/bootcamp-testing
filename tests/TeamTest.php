@@ -70,6 +70,21 @@ class TeamTest extends TestCase
     }
 
     /**
+     * @test when adding many members at once you still may not exceed the team maximum size
+     */
+    public function when_adding_many_members_at_once_you_still_may_not_exceed_the_team_maximum_size ()
+    {
+        $team = factory(Team::class)->create(['size' => 2]);
+
+        $users = factory(User::class, 3)->create();
+
+        $this->setExpectedException('Exception');
+
+        $team->add($users);
+
+    }
+
+    /**
      * @test a team can remove a member
      */
     public function a_team_can_remove_a_member ()
