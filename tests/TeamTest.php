@@ -67,4 +67,33 @@ class TeamTest extends TestCase
         $this->assertEquals(2, $team->count());
 
     }
+
+    /** @test */
+    function a_team_can_remove_a_member()
+    {
+        $team = factory(Team::class)->create();
+
+        $users = factory(User::class, 2)->create();
+
+        $team->add($users);
+
+        $team->remove($users[0]);
+
+        $this->assertEquals(1, $team->count());
+
+    }
+
+    /** @test */
+    function a_team_can_remove_more_than_one_member_at_once()
+    {
+        $team = factory(Team::class)->create();
+
+        $users = factory(User::class, 5)->create();
+
+        $team->add($users);
+
+        $team->removeAll();
+
+        $this->assertEquals(0, $team->count());
+    }
 }
