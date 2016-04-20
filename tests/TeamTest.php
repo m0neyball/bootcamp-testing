@@ -8,11 +8,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TeamTest extends TestCase
 {
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
+    use DatabaseTransactions;
+
+
     /** @test */
     function a_team_has_a_name()
     {
