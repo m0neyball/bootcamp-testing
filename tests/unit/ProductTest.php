@@ -15,15 +15,15 @@ class ProductTest extends PHPUnit_Framework_TestCase
     {
         $this->product = new Product('Fallout 4', 59);
     }
-
-    function testAProductHasName()
+    /** @test */
+    function a_product_has_a_name()
     {
 //        $product = new Product('Fallout 4', 59);
 
         $this->assertEquals('Fallout 4', $this->product->name());
     }
-
-    function testAProductHasCose()
+    /** @test */
+    function a_product_has_a_cost()
     {
 //        $product = new Product('Fallout 4', 59);
 
