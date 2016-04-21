@@ -1,4 +1,7 @@
 <?php
+use App\Post;
+use App\User;
+
 /**
  * Created by PhpStorm.
  * User: mac
@@ -14,13 +17,25 @@ class LikesTest extends TestCase
     public function a_user_can_like_a_post()
     {
         //given I have a post
+
         //and a user
         //and that user is logged in
 
         //when they like a post
 
         //then we should see evidence in database, and the post should be liked.
-        
+        $post = factory(Post::class)->create();
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user);
+
+        $post->like();
+
+        $this->seeInDatabase('likes',[
+            'user_id' => $user->id,
+            'likeable_id' => $post->id,
+            'likeable_type' => get_class($post)
+        ]);
 
     }
 }
