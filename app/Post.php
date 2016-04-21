@@ -33,4 +33,14 @@ class Post extends Model
                     ->where('user_id', Auth::id())
                     ->count();
     }
+
+    public function toggle()
+    {
+        if($this->isLiked())
+        {
+            return $this->unlike();
+        }
+
+        return $this->like();
+    }
 }
