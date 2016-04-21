@@ -77,7 +77,7 @@ class TeamTest extends TestCase
 
         $team->add($users);
 
-        $team->remove($users[0]);
+        $team->remove($users[1]);
 
         $this->assertEquals(1, $team->count());
 

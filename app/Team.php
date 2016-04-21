@@ -37,6 +37,19 @@ class Team extends Model
         return $this->members()->count();
     }
 
+    public function remove($user)
+    {
+        return $this->members()
+            ->where('id', $user->id)
+            ->update (['team_id' => null]);
+    }
+
+    public function removeAll()
+    {
+        return $this->members()
+            ->update (['team_id' => null]);
+    }
+
     private function guardAgainstTooManyMember()
     {
         if($this->count() >= $this->size)
