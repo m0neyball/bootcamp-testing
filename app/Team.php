@@ -44,7 +44,14 @@ class Team extends Model
             ->update (['team_id' => null]);
     }
 
-    public function removeAll()
+    public function removeMany($users)
+    {
+        return $this->members()
+        ->whereIn('id', $users->pluck('id'))
+        ->update (['team_id' => null]);
+    }
+
+    public function restart()
     {
         return $this->members()
             ->update (['team_id' => null]);
