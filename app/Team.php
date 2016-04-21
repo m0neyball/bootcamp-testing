@@ -59,15 +59,30 @@ class Team extends Model
             ->update (['team_id' => null]);
     }
 
-    private function guardAgainstTooManyMember($users)
+    public function maximumSize()
     {
-        $numUsersAdd = ($users instanceof User)?1:$users->count();
+        return $this->size;
+    }
 
-        $newTeamCount = $this->count() + $numUsersAdd;
+    protected function guardAgainstTooManyMember($users)
+    {
 
-        if($newTeamCount >= $this->size)
+        $newTeamCount = $this->count() + $this->extractNewUsersCount($users);
+
+        if($newTeamCount >= $this->maximumSize())
         {
             throw new Exception;
         }
+    }
+
+    protected function extractNewUsersCount($users)
+    {
+        $numUsersAdd = 1;
+        if(!($users instanceof User))
+        {
+            $numUsersAdd = count($users);
+        }
+
+        return $numUsersAdd;
     }
 }
