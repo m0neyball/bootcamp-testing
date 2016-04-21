@@ -13,17 +13,19 @@ class Team extends Model
         'size'
     ];
 
-    public function add($user)
+    public function add($users)
     {
+//        $this->guardAgainstTooManyMember($users);
         $this->guardAgainstTooManyMember();
 
+
         $method =  'saveMany';
-        if($user instanceof User)
+        if($users instanceof User)
         {
             $method = 'save';
         }
 
-        $this->members()->$method($user);
+        $this->members()->$method($users);
 
     }
 
@@ -57,9 +59,13 @@ class Team extends Model
             ->update (['team_id' => null]);
     }
 
-    private function guardAgainstTooManyMember()
+    private function guardAgainstTooManyMember($users)
     {
-        if($this->count() >= $this->size)
+        $numUsersAdd = ($users instanceof User)?1:$users->count();
+
+        $newTeamCount = $this->count() + $numUsersAdd;
+
+        if($newTeamCount >= $this->size)
         {
             throw new Exception;
         }
