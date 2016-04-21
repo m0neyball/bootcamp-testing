@@ -43,4 +43,9 @@ class Post extends Model
 
         return $this->like();
     }
+
+    public function getLikesCountAttribute()
+    {
+        return $this->likes()->count();
+    }
 }
