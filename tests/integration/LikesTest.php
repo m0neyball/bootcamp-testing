@@ -1,6 +1,7 @@
 <?php
 use App\Post;
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 /**
  * Created by PhpStorm.
@@ -11,6 +12,8 @@ use App\User;
 
 class LikesTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * @test
      */
