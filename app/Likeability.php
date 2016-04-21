@@ -8,6 +8,7 @@
 
 namespace App;
 
+use Auth;
 
 trait Likeability
 {
