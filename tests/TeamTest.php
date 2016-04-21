@@ -11,8 +11,12 @@ class TeamTest extends TestCase
     use DatabaseTransactions;
 
 
-    /** @test */
-    function a_team_has_a_name()
+    /**
+     * a_team_has_a_name
+     *
+     * @test
+     */
+    public function a_team_has_a_name()
     {
         $team = new Team(['name' => 'Acme']);
 
@@ -21,7 +25,7 @@ class TeamTest extends TestCase
     
 
     /** @test */
-    function a_team_can_add_members()
+    public function a_team_can_add_members()
     {
         $team = factory(Team::class)->create();
 
@@ -36,7 +40,7 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    function a_team_has_a_maximun_size()
+    public function a_team_has_a_maximun_size()
     {
         $team = factory(Team::class)->create(['size' => 2]);
 
@@ -56,7 +60,7 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    function a_team_can_add_multiple_members_at_one()
+    public function a_team_can_add_multiple_members_at_one()
     {
         $team = factory(Team::class)->create();
 
@@ -69,7 +73,7 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    function a_team_can_remove_a_member()
+    public function a_team_can_remove_a_member()
     {
         $team = factory(Team::class)->create();
 
@@ -84,7 +88,7 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    function a_team_can_remove_more_than_one_member_at_once()
+    public function a_team_can_remove_more_than_one_member_at_once()
     {
         $team = factory(Team::class)->create();
 
@@ -98,7 +102,7 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    function a_team_can_remove_all_members_at_once()
+    public function a_team_can_remove_all_members_at_once()
     {
         $team = factory(Team::class)->create();
 
@@ -109,5 +113,20 @@ class TeamTest extends TestCase
         $team->restart();
 
         $this->assertEquals(0, $team->count());
+    }
+
+    /**
+     * @test
+     */
+    public function when_adding_many_members_at_once_you_still_may_not_exceed_the_team_maximum_size()
+    {
+        $team = factory(Team::class)->create(['size' => 2]);
+
+        $users = factory(User::class, 3)->create();
+
+        $this->setExpectedException('Exception');
+
+        $team->add($users);
+
     }
 }
