@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -9,6 +11,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      */
     protected $baseUrl = 'http://localhost';
 
+    protected $user;
     /**
      * Creates the application.
      *
@@ -21,5 +24,18 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
+    }
+
+    public function signIn($user = null)
+    {
+        if(!$user)
+        {
+            $user = factory(User::class)->create();
+        }
+        $this->user = $user;
+
+        $this->actingAs($this->user);
+
+        return $this;
     }
 }
