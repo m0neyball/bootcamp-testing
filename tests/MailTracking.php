@@ -20,11 +20,6 @@ trait MailTracking
         Mail::getSwiftMailer()
             ->registerPlugin(new TestingMailEventListener($this));
     }
-
-    public function addEmail(Swift_Message $email)
-    {
-        $this->emails[] = $email;
-    }
     
     protected function seeEmailWasSent()
     {
@@ -44,14 +39,28 @@ trait MailTracking
         return $this;
     }
 
-    protected function seeEmailTo($recipient)
+    protected function seeEmailTo($recipient, Swift_Message $message = null)
     {
-        $email = end($this->emails);
 
-
-        $this->assertArrayHasKey($recipient, $email->getTo(),
+        $this->assertArrayHasKey($recipient, $this->getEmail($message)->getTo(),
             "No email was sent to $recipient.");
 
+    }
+
+
+    public function addEmail(Swift_Message $email)
+    {
+        $this->emails[] = $email;
+    }
+
+    protected function getEmail(Swift_Message $message = null)
+    {
+        return $message ?: $this->lastEmail();
+    }
+
+    protected function lastEmail()
+    {
+        return end($this->emails);
     }
 }
 
