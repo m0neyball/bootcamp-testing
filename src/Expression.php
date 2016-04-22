@@ -16,4 +16,9 @@ class Expression
     {
         return $this->find($value);
     }
+
+    public function anything ()
+    {
+        return '/' . '.*' . '/';
+    }
 }
