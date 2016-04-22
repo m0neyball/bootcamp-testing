@@ -8,10 +8,11 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
     public function it_finds_a_string ()
     {
         $regex = Expression::make ()->find ('www');
-        $this->assertRegExp ($regex, 'www');
-
+        // $this->assertRegExp ((string) $regex, 'www');
+        $this->assertTrue($regex->test('www'));
         $regex = Expression::make ()->then ('www');
-        $this->assertRegExp ($regex, 'www');
+        // $this->assertRegExp ((string) $regex, 'www');
+        $this->assertTrue($regex->test('www'));
     }
 
     /**
@@ -20,7 +21,9 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
     public function it_checks_for_anything ()
     {
         $regex = Expression::make ()->anything ();
-        $this->assertRegExp ($regex, 'foo');
+        // $this->assertRegExp ($regex->__toString(), 'foo');
+        // $this->assertTrue(!! preg_match($regex, 'foo'));
+        $this->assertTrue ($regex->test ('foo'));
     }
 
     /**
@@ -29,8 +32,10 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
     public function it_maybe_has_a_value ()
     {
         $regex = Expression::make ()->maybe ('http');
-        $this->assertRegExp ($regex, 'http');
-        $this->assertRegExp ($regex, '');
+        // $this->assertRegExp ($regex, 'http');
+        // $this->assertRegExp ($regex, '');
+        $this->assertTrue ($regex->test ('http'));
+        $this->assertTrue ($regex->test (''));
     }
 
     /**
@@ -38,7 +43,9 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
      */
     public function it_can_chain_method_calls ()
     {
-        $regex = Expression::make ()->find ('foo')->maybe('bar')->then('biz');
-        $this->assertRegExp ($regex, 'foobarbiz');
+        $regex = Expression::make ()->find ('www')->maybe ('.')->then ('moneyball');
+
+        $this->assertTrue($regex->test('www.moneyball'));
+        $this->assertFalse($regex->test('wwwXmoneyball'));
     }
 }
