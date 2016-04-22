@@ -40,6 +40,15 @@ class ExampleTest extends TestCase
     {
         $this->assertNotEmpty($this->emails, 'No emails have been sent.');
     }
+
+    protected function seeEmailsSent($count)
+    {
+        $emailsSent = count($this->emails);
+
+        $this->assertCount($count, $this->emails,
+            "Expected $count emails to have been Sent, but $emailsSent were."
+            );
+    }
 }
 
 class TestingMailEventListener implements Swift_Events_EventListener
