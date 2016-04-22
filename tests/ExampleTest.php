@@ -27,5 +27,8 @@ class ExampleTest extends TestCase
             ->seeEmailWasSent();
     }
 
-   
+    protected function seeEmailWasSent()
+    {
+        
+    }
 }
