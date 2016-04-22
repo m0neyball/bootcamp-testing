@@ -13,7 +13,8 @@ class LikesTest extends TestCase
     {
         parent::setUp ();
         // given I have a post
-        $this->post = factory (Post::class)->create ();
+        // $this->post = factory (Post::class)->create ();
+        $this->post = createPost();
 
         $this->signIn();
     }
