@@ -61,6 +61,11 @@ class Team extends Model
         return $this->members ()->count ();
     }
 
+    public function maximumSize ()
+    {
+        return $this->size;
+    }
+
     protected function auardAgainstTooManyMembers ($users)
     {
         if (($users instanceof User)) {
