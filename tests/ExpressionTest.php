@@ -40,4 +40,11 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
 
         $this->assertRegExp($regex, 'http');
     }
+
+    public function it_can_chain_method_calls()
+    {
+        $regex =  Expression::make()->find('foo')->maybe('bar')->then('biz');
+
+        $this->assertRegExp($regex, 'boobarbiz');
+    }
 }
