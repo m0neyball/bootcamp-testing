@@ -12,20 +12,12 @@ class ProphecyExampleTest extends PHPUnit_Framework_TestCase
      */
     public function test_something()
     {
-        $directive = $this->prophesize(BaldeDirective::class);
+        $cache = $this->prophesize(RussianCache::class);
 
-        $directive->foo('bar')->shouldBeCalled()->willReturn('foobar');
+        $directive = new BaldeDirective($cache);
 
-        $response = $directive->reveal()->foo('bar');
+        $cache->has('cache-key');
 
-        $this->assertEquals('foobar', $response);
-    }
-}
-
-class BaldeDirective
-{
-    public function foo()
-    {
-        
+        $directive->setUp('cache-key');
     }
 }
