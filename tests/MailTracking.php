@@ -43,6 +43,14 @@ trait MailTracking
             "No email with the provided body was sent."
         );
     }
+
+    protected function seeEmailContains($excerpt, Swift_Message $message = null)
+    {
+        $this->assertContains(
+            $excerpt, $this->getEmail($message)->getBody(),
+            "No email containing the provided body was found."
+        );
+    }
     
     protected function seeEmailsSent($count)
     {
