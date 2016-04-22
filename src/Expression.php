@@ -11,11 +11,12 @@ class Expression
 
     public function find ($value)
     {
-        $value = $this->sanitize($value);
+        $value = $this->sanitize ($value);
         // return '/' . $value . '/';
-        $this->expression .= $value;
+        // $this->expression .= $value;
+        // $this->add ($value);
 
-        return $this;
+        return $this->add ($value);
     }
 
     public function then ($value)
@@ -26,16 +27,25 @@ class Expression
     public function anything ()
     {
         // return '/' . '.*' . '/';
-        $this->expression .= '.*';
+        // $this->expression .= '.*';
+        // $this->add ('.*');
 
-        return $this;
+        return $this->add ('.*');
     }
 
     public function maybe ($value)
     {
-        $value = $this->sanitize($value);
+        $value = $this->sanitize ($value);
         // return '/(' . $value . ')?/';
-        $this->expression .= '(' . $value . ')?';
+        // $this->expression .= '(' . $value . ')?';
+        // $this->add ('(' . $value . ')?');
+
+        return $this->add ('(' . $value . ')?');
+    }
+
+    protected function add ($value)
+    {
+        $this->expression .= $value;
 
         return $this;
     }
