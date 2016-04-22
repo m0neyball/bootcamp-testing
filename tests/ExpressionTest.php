@@ -48,4 +48,18 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($regex->test('www.moneyball'));
         $this->assertFalse($regex->test('wwwXmoneyball'));
     }
+
+    /**
+     * @test
+     */
+    public function it_can_exclude_values ()
+    {
+        $regex = Expression::make ()
+            ->find ('foo')
+            ->anythingBut('bar')
+            ->then('biz');
+
+        $this->assertTrue($regex->test('foobazbiz'));
+        $this->assertFalse($regex->test('foobarbiz'));
+    }
 }
