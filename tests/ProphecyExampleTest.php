@@ -34,6 +34,22 @@ class ProphecyExampleTest extends PHPUnit_Framework_TestCase
 
         $directive->setUp(new ModelStub);
     }
+
+    /**
+     * @test
+     */
+    public function it_normalizes_an_array_for_the_cache_key()
+    {
+        $cache = $this->prophesize(RussianCache::class);
+
+        $directive = new BladeDirective($cache->reveal());
+
+        $item = ['foo', 'bar'];
+
+        $cache->has(md5('foobar'))->shouldBeCalled();
+
+        $directive->setUp($item);
+    }
 }
 
 class ModelStub
