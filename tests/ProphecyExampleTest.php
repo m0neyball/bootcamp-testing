@@ -14,7 +14,7 @@ class ProphecyExampleTest extends PHPUnit_Framework_TestCase
     {
         $cache = $this->prophesize(RussianCache::class);
 
-        $directive = new BaldeDirective($cache);
+        $directive = new BladeDirective($cache);
 
         $cache->has('cache-key');
 
