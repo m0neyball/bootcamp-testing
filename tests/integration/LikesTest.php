@@ -1,9 +1,13 @@
 <?php
+
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 use App\Post;
 
 class LikesTest extends TestCase
 {
+    use DatabaseTransactions;
+
     /**
      * @test
      */
