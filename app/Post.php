@@ -26,6 +26,15 @@ class Post extends Model
              ->delete();
     }
 
+    public function toggle()
+    {
+        if ($this->isLiked()) {
+            return $this->unlike();
+        }
+
+        return $this->like();
+    }
+
     public function isLiked()
     {
         return !! $this->likes()
