@@ -37,7 +37,7 @@ class ExampleTest extends TestCase
 
     protected function seeEmailWasSent()
     {
-        $this->assertNotEmpty($this->emails);
+        $this->assertNotEmpty($this->emails, 'No emails have been sent.');
     }
 }
 
