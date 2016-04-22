@@ -9,21 +9,32 @@ class Expression
 
     public function find($value)
     {
-        return '/'.$value.'/';
+        $this->expression .= $value;
+
+        return $this;
     }
 
     public function then($value)
     {
+
+
         return $this->find($value);
     }
 
     public function anything()
     {
-        return '/'.'.*'.'/';
+        $this->expression .= '.*';
+
+        return $this;
     }
 
     public function maybe($value)
     {
+
         return '/('.$value.')?/';
+
+        $this->expression .= '('.$value.')?';
+
+        return $this;
     }
 }
