@@ -18,17 +18,12 @@ class ExampleTest extends TestCase
     {
         Mail::raw('Hello world', function ($message){
             $message->to('foo@bar.com');
-            $message->from('foo@bar.com');
-        });
-
-        Mail::raw('Hello world', function ($message){
-            $message->to('foo@bar.com');
-            $message->from('foo@bar.com');
+            $message->from('bar@foo.com');
         });
 
 //        $this->seeEmailWasSent();
-        $this->seeEmailsSent(2)
-            ->seeEmailTo('foo@bar.com');
+        $this->seeEmailTo('foo@bar.com');
+        $this->seeEmailFrom('bar@foo.com');
     }
 
     
