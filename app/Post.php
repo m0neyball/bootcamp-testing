@@ -41,4 +41,10 @@ class Post extends Model
                     ->where('user_id', Auth::id())
                     ->count();
     }
+
+    public function getLikesCountAttribute()
+    {
+        return $this->likes()
+                    ->count();
+    }
 }
