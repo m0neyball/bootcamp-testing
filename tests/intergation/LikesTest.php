@@ -1,6 +1,5 @@
 <?php
 use App\Post;
-use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class LikesTest extends TestCase
@@ -15,15 +14,13 @@ class LikesTest extends TestCase
         parent::setUp();
 
         $this->post = factory(Post::class)->create();
-        $this->user = factory(User::class)->create();
+        $this->singIn();
     }
     /**
      * @test a user can like post
      */
     public function a_user_can_like_post()
     {
-        $this->actingAs($this->user);
-
         $this->post->like();
 
         // the we should see evidence in the database, and the post should be liked.
@@ -41,8 +38,6 @@ class LikesTest extends TestCase
      */
     public function a_user_can_unlike_a_post()
     {
-        $this->actingAs($this->user);
-
         $this->post->like();
         $this->post->unlike();
 
@@ -61,8 +56,6 @@ class LikesTest extends TestCase
      */
     public function a_user_may_toggle_a_posts_like_status()
     {
-        $this->actingAs($this->user);
-
         $this->post->toggle();
 
         $this->assertTrue($this->post->isLiked());
@@ -78,8 +71,6 @@ class LikesTest extends TestCase
      */
     public function a_post_knows_how_many_likes_it_has()
     {
-        $this->actingAs($this->user);
-
         $this->post->toggle();
 
         $this->assertEquals(1, $this->post->likesCount);
