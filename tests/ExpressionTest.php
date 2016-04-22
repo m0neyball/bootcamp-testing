@@ -27,8 +27,8 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
     {
         $regex =  Expression::make()->anything();
 
-        $this->assertTrue(!!preg_match($regex, 'foo'));
-
+//        $this->assertTrue(!!preg_match($regex, 'foo'));
+        $this->assertTrue($regex->test('foo'));
     }
 
     /**
