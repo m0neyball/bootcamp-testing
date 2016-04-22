@@ -38,6 +38,11 @@ class Expression
         return $this;
     }
 
+    public function test($value)
+    {
+        return (bool)preg_match($this->__toString(), $value);
+    }
+
     public function __toString()
     {
         return '/' . $this->expression . '/';
