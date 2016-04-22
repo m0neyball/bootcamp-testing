@@ -10,7 +10,7 @@ class Team extends Model
 
     public function add ($users)
     {
-        $this->auardAgainstTooManyMembers ($users);
+        $this->auardAgainstTooManyMembers ($this->extractNewUsersCount($users));
         $method = $users instanceof User ? 'save' : 'saveMany';
         $this->members ()->$method ($users);
     }
@@ -66,16 +66,20 @@ class Team extends Model
         return $this->size;
     }
 
-    protected function auardAgainstTooManyMembers ($users)
+    protected function auardAgainstTooManyMembers ($newUsersCount)
     {
-        if (($users instanceof User)) {
-            $numUsersToAdd = 1;
-        } else {
-            $numUsersToAdd = $users->count ();
-        }
-        $newTeamCount = $this->count () + $numUsersToAdd;
+        $newTeamCount = $this->count () + $newUsersCount;
         if ($newTeamCount > $this->maximumSize ()) {
             throw new Exception;
         }
+    }
+
+    protected function extractNewUsersCount ($users)
+    {
+        if (($users instanceof User)) {
+            return 1;
+        }
+
+        return count($users);
     }
 }
