@@ -30,6 +30,8 @@ class Expression
 
     public function maybe($value)
     {
+        $value = preg_quote($value, '/');
+
         $this->expression .= '('.$value.')?';
 
         return $this;
