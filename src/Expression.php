@@ -2,6 +2,8 @@
 
 class Expression
 {
+    protected $expression ='';
+
     public static function make()
     {
         return new static;
@@ -16,8 +18,6 @@ class Expression
 
     public function then($value)
     {
-
-
         return $this->find($value);
     }
 
