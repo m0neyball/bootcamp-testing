@@ -39,6 +39,11 @@ class Post extends Model
             ->count ();
     }
 
+    public function getLikesCountAttribute ()
+    {
+        return $this->likes()->count();
+    }
+
     public function likes ()
     {
         return $this->morphMany ('App\Like', 'likeable');
