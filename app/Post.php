@@ -14,6 +14,14 @@ class Post extends Model
         $this->likes ()->save ($like);
     }
 
+    public function unlike ()
+    {
+        $this
+            ->likes()
+            ->where('user_id', Auth::id())
+            ->delete();
+    }
+
     public function isLiked ()
     {
         return !!$this
