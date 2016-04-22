@@ -12,6 +12,9 @@ class ProphecyExampleTest extends PHPUnit_Framework_TestCase
      */
     public function test_something()
     {
-        $this->prophesize();
+        $directive = $this->prophesize(BaldeDirective::class);
+
+        $directive->foo()->shouldBeCalled();
+
     }
 }
