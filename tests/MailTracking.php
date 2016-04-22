@@ -48,8 +48,9 @@ trait MailTracking
     {
         $email = end($this->emails);
 
-        
-        $this->assertArrayHasKey($recipient, $email->getTo());
+
+        $this->assertArrayHasKey($recipient, $email->getTo(),
+            "No email was sent to $recipient.");
 
     }
 }
