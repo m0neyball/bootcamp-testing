@@ -27,7 +27,8 @@ class ExampleTest extends TestCase
             $message->from('foo@bar.com');
         });
 
-        $this->seeEmailWasSent();
+//        $this->seeEmailWasSent();
+        $this->seeEmailsSent(2);
     }
 
     public function addEmail(Swift_Message $email)
