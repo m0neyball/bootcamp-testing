@@ -16,14 +16,8 @@ class ExampleTest extends TestCase
      */
     public function testBasicExample()
     {
-        Mail::raw('Hello world', function ($message){
-            $message->to('foo@bar.com');
-            $message->from('bar@foo.com');
-        });
-
-//        $this->seeEmailWasSent();
-       $this->seeEmailEquals('Hello world')
-            ->seeEmailContains('Hello');
+        $this->visit('/')
+            ->seeEmailWasSent();
     }
 
     
