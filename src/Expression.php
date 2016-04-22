@@ -15,7 +15,6 @@ class Expression
         // return '/' . $value . '/';
         // $this->expression .= $value;
         // $this->add ($value);
-
         return $this->add ($value);
     }
 
@@ -29,7 +28,6 @@ class Expression
         // return '/' . '.*' . '/';
         // $this->expression .= '.*';
         // $this->add ('.*');
-
         return $this->add ('.*');
     }
 
@@ -39,8 +37,15 @@ class Expression
         // return '/(' . $value . ')?/';
         // $this->expression .= '(' . $value . ')?';
         // $this->add ('(' . $value . ')?');
-
         return $this->add ('(' . $value . ')?');
+    }
+
+    public function anythingBut ($value)
+    {
+        $value = $this->sanitize ($value);
+
+        // /foo(?!bar)biz/
+        return $this->add ("(?!$value).*?");
     }
 
     protected function add ($value)
