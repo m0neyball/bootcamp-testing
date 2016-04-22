@@ -66,4 +66,19 @@ class LikesTest extends TestCase
         $post->toggle ();
         $this->assertFalse ($post->isLiked ());
     }
+
+    /**
+     * @test
+     */
+    public function a_post_knows_how_many_likes_it_has ()
+    {
+        // given I have a post
+        $post = factory (Post::class)->create ();
+        // and a user
+        $user = factory (User::class)->create ();
+        // and that user is logged in
+        $this->actingAs ($user);
+        $post->toggle ();
+        $this->assertEquals (1, $post->likesCount);
+    }
 }
