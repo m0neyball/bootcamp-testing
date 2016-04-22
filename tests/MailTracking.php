@@ -30,6 +30,7 @@ trait MailTracking
     {
         $this->assertNotEmpty($this->emails,
             'No emails have been sent.');
+        return $this;
     }
     
     protected function seeEmailsSent($count)
@@ -39,6 +40,16 @@ trait MailTracking
         $this->assertCount($count, $this->emails,
             "Expected $count emails to have been Sent, but $emailsSent were."
         );
+
+        return $this;
+    }
+
+    protected function seeEmailTo($recipient)
+    {
+        $email = end($this->emails);
+
+        $this->assertArrayHasKey($recipient, $email->getTo());
+
     }
 }
 
