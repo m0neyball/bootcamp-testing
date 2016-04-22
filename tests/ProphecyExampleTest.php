@@ -16,7 +16,7 @@ class ProphecyExampleTest extends PHPUnit_Framework_TestCase
 
         $directive = new BladeDirective($cache->reveal());
 
-        $cache->has('cache-key');
+        $cache->has('cache-key')->shouldBeCalled();
 
         $directive->setUp('cache-key');
     }
