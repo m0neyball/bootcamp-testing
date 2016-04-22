@@ -42,6 +42,8 @@ trait MailTracking
             $body, $this->getEmail($message)->getBody(),
             "No email with the provided body was sent."
         );
+
+        return $this;
     }
 
     protected function seeEmailContains($excerpt, Swift_Message $message = null)
@@ -50,6 +52,8 @@ trait MailTracking
             $excerpt, $this->getEmail($message)->getBody(),
             "No email containing the provided body was found."
         );
+
+        return $this;
     }
     
     protected function seeEmailsSent($count)
@@ -68,7 +72,7 @@ trait MailTracking
 
         $this->assertArrayHasKey($recipient, $this->getEmail($message)->getTo(),
             "No email was sent to $recipient.");
-
+        return $this;
     }
 
     protected function seeEmailFrom($sender, Swift_Message $message = null)
@@ -77,7 +81,7 @@ trait MailTracking
         $this->assertArrayHasKey($sender,
             $this->getEmail($message)->getFrom(),
             "No email was sent from $sender.");
-
+        return $this;
     }
 
 
