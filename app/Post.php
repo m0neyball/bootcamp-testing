@@ -17,16 +17,25 @@ class Post extends Model
     public function unlike ()
     {
         $this
-            ->likes()
-            ->where('user_id', Auth::id())
-            ->delete();
+            ->likes ()
+            ->where ('user_id', Auth::id ())
+            ->delete ();
+    }
+
+    public function toggle ()
+    {
+        if ($this->isLiked ()) {
+            $this->unlike ();
+        } else {
+            $this->like ();
+        }
     }
 
     public function isLiked ()
     {
         return !!$this
             ->likes ()
-            ->where ('user_id', Auth::id())
+            ->where ('user_id', Auth::id ())
             ->count ();
     }
 
