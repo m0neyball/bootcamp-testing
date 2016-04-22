@@ -30,10 +30,17 @@ class ProphecyExampleTest extends PHPUnit_Framework_TestCase
 
         $directive = new BladeDirective($cache->reveal());
 
-        $cache->has('cache-key')->shouldBeCalled();
+        $cache->has('stub-cache-key')->shouldBeCalled();
 
         $directive->setUp(new ModelStub);
     }
 }
 
+class ModelStub
+{
+    public function getCacheKey()
+    {
+        return 'stub-cache-key';
+    }
+}
 
