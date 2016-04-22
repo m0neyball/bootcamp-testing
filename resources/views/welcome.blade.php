@@ -38,6 +38,7 @@
     <body>
         <div class="container">
             <div class="content">
+                <h1>Laravel 5</h1>
                 <a href="/feedback">Click Me</a>
             </div>
         </div>
