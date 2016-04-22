@@ -63,6 +63,6 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
             ->anythingBut('bar')
             ->then('biz');
         $this->assertTrue($regex->test('foobazbiz'));
-        $this->assertFalse($regex->test('foobazbiz'));
+        $this->assertFalse($regex->test('foobarbiz'));
     }
 }
