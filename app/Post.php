@@ -16,6 +16,6 @@ class Post extends Model
 
     public function likes ()
     {
-        return $this->morphMany (Like::create, 'likeable');
+        return $this->morphMany ('App\Like', 'likeable');
     }
 }
