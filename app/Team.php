@@ -8,11 +8,11 @@ class Team extends Model
 {
     protected $fillable = ['name', 'size'];
 
-    public function add ($user)
+    public function add ($users)
     {
-        $this->auardAgainstTooManyMembers ();
-        $method = $user instanceof User ? 'save' : 'saveMany';
-        $this->members ()->$method ($user);
+        $this->auardAgainstTooManyMembers ($users);
+        $method = $users instanceof User ? 'save' : 'saveMany';
+        $this->members ()->$method ($users);
     }
 
     public function remove ($users = null)
@@ -31,6 +31,7 @@ class Team extends Model
         });
         */
         $usersId = $users->pluck ('id');
+
         return $this
             ->members ()
             ->whereIn ('id', $usersId)
@@ -60,9 +61,15 @@ class Team extends Model
         return $this->members ()->count ();
     }
 
-    protected function auardAgainstTooManyMembers ()
+    protected function auardAgainstTooManyMembers ($users)
     {
-        if ($this->count () >= $this->size) {
+        if (($users instanceof User)) {
+            $numUsersToAdd = 1;
+        } else {
+            $numUsersToAdd = $users->count ();
+        }
+        $newTeamCount = $this->count () + $numUsersToAdd;
+        if ($newTeamCount > $this->size) {
             throw new Exception;
         }
     }
