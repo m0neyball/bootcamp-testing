@@ -13,11 +13,11 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
     {
         $regex =  Expression::make()->find('www');
 
-        $this->assertRegExp((string)$regex, 'www');
+        $this->assertTrue($regex->test('www'));
 
         $regex =  Expression::make()->then('www');
 
-        $this->assertRegExp((string)$regex, 'www');
+        $this->assertTrue($regex->test('www'));
     }
 
     /**
@@ -38,13 +38,14 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
     {
         $regex =  Expression::make()->maybe('http');
 
-        $this->assertRegExp((string)$regex, 'http');
+        $this->assertTrue($regex->test('http'));
+        $this->assertTrue($regex->test(''));
     }
 
     public function it_can_chain_method_calls()
     {
         $regex =  Expression::make()->find('foo')->maybe('bar')->then('biz');
 
-        $this->assertRegExp((string)$regex, 'boobarbiz');
+        $this->assertTrue($regex->test('foobarbiz'));
     }
 }

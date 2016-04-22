@@ -30,9 +30,6 @@ class Expression
 
     public function maybe($value)
     {
-
-        return '/('.$value.')?/';
-
         $this->expression .= '('.$value.')?';
 
         return $this;
@@ -40,7 +37,7 @@ class Expression
 
     public function test($value)
     {
-        return (bool)preg_match($this->__toString(), $value);
+        return (bool) preg_match($this->__toString(), $value);
     }
 
     public function __toString()
