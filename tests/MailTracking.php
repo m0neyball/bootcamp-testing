@@ -47,6 +47,15 @@ trait MailTracking
 
     }
 
+    protected function seeEmailFrom($sender, Swift_Message $message = null)
+    {
+
+        $this->assertArrayHasKey($sender,
+            $this->getEmail($message)->getFrom(),
+            "No email was sent from $sender.");
+
+    }
+
 
     public function addEmail(Swift_Message $email)
     {
@@ -55,6 +64,7 @@ trait MailTracking
 
     protected function getEmail(Swift_Message $message = null)
     {
+        $this->seeEmailWasSent();
         return $message ?: $this->lastEmail();
     }
 
