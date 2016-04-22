@@ -11,4 +11,19 @@ class Expression
     {
         return '/'.$value.'/';
     }
+
+    public function then($value)
+    {
+        return $this->find($value);
+    }
+
+    public function anything()
+    {
+        return '/'.'.*'.'/';
+    }
+
+    public function maybe($value)
+    {
+        return '/('.$value.')?/';
+    }
 }
