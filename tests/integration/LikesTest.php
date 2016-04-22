@@ -49,4 +49,21 @@ class LikesTest extends TestCase
         ]);
         $this->assertFalse ($post->isLiked ());
     }
+
+    /**
+     * @test
+     */
+    public function a_user_may_toggle_a_post_like_status ()
+    {
+        // given I have a post
+        $post = factory (Post::class)->create ();
+        // and a user
+        $user = factory (User::class)->create ();
+        // and that user is logged in
+        $this->actingAs ($user);
+        $post->toggle ();
+        $this->assertTrue ($post->isLiked ());
+        $post->toggle ();
+        $this->assertFalse ($post->isLiked ());
+    }
 }
