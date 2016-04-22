@@ -22,7 +22,8 @@ class ExampleTest extends TestCase
         });
 
 //        $this->seeEmailWasSent();
-       $this->seeEmailEquals('Hello world');
+       $this->seeEmailEquals('Hello world')
+            ->seeEmailContains('Hello');
     }
 
     
