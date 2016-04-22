@@ -23,5 +23,6 @@ class LikesTest extends TestCase
             'likeable_id'   => $post->id,
             'likeable_type' => get_class ($post),
         ]);
+        $this->assertTrue ($post->isLiked ());
     }
 }
