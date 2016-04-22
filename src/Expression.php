@@ -11,6 +11,7 @@ class Expression
 
     public function find ($value)
     {
+        $value = preg_quote ($value, '/');
         // return '/' . $value . '/';
         $this->expression .= $value;
 
