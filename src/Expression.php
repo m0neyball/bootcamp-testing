@@ -42,11 +42,16 @@ class Expression
     public function test ($value)
     {
         // var_dump($this->__toString());
-        return (bool) preg_match ($this->__toString (), $value);
+        return (bool) preg_match ($this->getRegex (), $value);
+    }
+
+    public function getRegex ()
+    {
+        return '/' . $this->expression . '/';
     }
 
     public function __toString ()
     {
-        return '/' . $this->expression . '/';
+        return $this->getRegex ();
     }
 }
