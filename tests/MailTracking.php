@@ -27,6 +27,14 @@ trait MailTracking
             'No emails have been sent.');
         return $this;
     }
+
+
+    protected function seeEmailWasNotSent()
+    {
+        $this->assertEmpty($this->emails,
+            'Did not expect any emails have been sent.');
+        return $this;
+    }
     
     protected function seeEmailsSent($count)
     {
