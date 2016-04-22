@@ -35,6 +35,14 @@ trait MailTracking
             'Did not expect any emails have been sent.');
         return $this;
     }
+
+    protected function seeEmailEquals($body, Swift_Message $message = null)
+    {
+        $this->assertEquals(
+            $body, $this->getEmail($message)->getBody(),
+            "No email with the provided body was sent."
+        );
+    }
     
     protected function seeEmailsSent($count)
     {
