@@ -37,6 +37,15 @@ class Expression
         return $this->add('.*');
     }
 
+    public function anythingBut($value)
+    {
+        $value = $this->sanitize($value);
+
+        $this->expression .=  "(?!$value).*?";
+        
+        return $this;
+    }
+
     public function maybe($value)
     {
         $value =  $this->sanitize($value);
