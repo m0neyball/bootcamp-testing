@@ -14,6 +14,14 @@ class Post extends Model
         $this->likes ()->save ($like);
     }
 
+    public function isLiked ()
+    {
+        return !!$this
+            ->likes ()
+            ->where ('user_id', Auth::id())
+            ->count ();
+    }
+
     public function likes ()
     {
         return $this->morphMany ('App\Like', 'likeable');
