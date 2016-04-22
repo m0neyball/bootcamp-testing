@@ -11,7 +11,7 @@ class Expression
 
     public function find ($value)
     {
-        $value = preg_quote ($value, '/');
+        $value = $this->sanitize($value);
         // return '/' . $value . '/';
         $this->expression .= $value;
 
@@ -33,11 +33,16 @@ class Expression
 
     public function maybe ($value)
     {
-        $value = preg_quote ($value, '/');
+        $value = $this->sanitize($value);
         // return '/(' . $value . ')?/';
         $this->expression .= '(' . $value . ')?';
 
         return $this;
+    }
+
+    protected function sanitize ($value)
+    {
+        return preg_quote ($value, '/');
     }
 
     public function test ($value)
