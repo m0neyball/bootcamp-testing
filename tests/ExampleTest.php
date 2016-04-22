@@ -22,8 +22,7 @@ class ExampleTest extends TestCase
         });
 
 //        $this->seeEmailWasSent();
-        $this->seeEmailTo('foo@bar.com');
-        $this->seeEmailFrom('bar@foo.com');
+       $this->seeEmailWasNotSent();
     }
 
     
