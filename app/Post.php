@@ -13,4 +13,9 @@ class Post extends Model
         ]);
         $this->likes ()->save ($like);
     }
+
+    public function likes ()
+    {
+        return $this->morphMany (Like::create, 'likeable');
+    }
 }
