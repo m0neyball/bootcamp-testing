@@ -42,10 +42,14 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($regex->test(''));
     }
 
+    /**
+     * @test
+     */
     public function it_can_chain_method_calls()
     {
-        $regex =  Expression::make()->find('foo')->maybe('bar')->then('biz');
+        $regex =  Expression::make()->find('www')->maybe('.')->then('laracasts');
 
-        $this->assertTrue($regex->test('foobarbiz'));
+        $this->assertTrue($regex->test('www.laracasts'));
+        $this->assertFalse($regex->test('wwwXlaracasts'));
     }
 }
