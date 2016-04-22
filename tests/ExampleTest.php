@@ -22,7 +22,7 @@ class ExampleTest extends TestCase
         });
 
 //        $this->seeEmailWasSent();
-       $this->seeEmailWasNotSent();
+       $this->seeEmailEquals('Hello world');
     }
 
     
