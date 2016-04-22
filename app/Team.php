@@ -74,7 +74,7 @@ class Team extends Model
             $numUsersToAdd = $users->count ();
         }
         $newTeamCount = $this->count () + $numUsersToAdd;
-        if ($newTeamCount > $this->size) {
+        if ($newTeamCount > $this->maximumSize ()) {
             throw new Exception;
         }
     }
