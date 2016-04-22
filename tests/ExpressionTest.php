@@ -11,6 +11,8 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
      */
     public function it_finds_a_string()
     {
+        $regex =  Expression::make()->find('www');
 
+        $this->assertRegExp($regex, 'www');
     }
 }
