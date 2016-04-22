@@ -13,4 +13,13 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
         $regex = Expression::make ()->then ('www');
         $this->assertRegExp ($regex, 'www');
     }
+
+    /**
+     * @test
+     */
+    public function it_checks_for_anything ()
+    {
+        $regex = Expression::make ()->anything ();
+        $this->assertRegExp ($regex, 'foo');
+    }
 }
