@@ -36,6 +36,14 @@ trait MailTracking
         return $this;
     }
 
+    public function seeEmailTo ($to)
+    {
+        $email = end ($this->emails);
+        $this->assertArrayHasKey ($to, $email->getTo ());
+
+        return $this;
+    }
+
     public function addEmail (Swift_Message $email)
     {
         $this->emails[] = $email;
