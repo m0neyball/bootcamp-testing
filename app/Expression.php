@@ -4,7 +4,7 @@ namespace App;
 
 class Expression
 {
-    protected $exporession = '';
+    protected $expression = '';
 
     public static function make()
     {
@@ -13,7 +13,7 @@ class Expression
 
     public function find($value)
     {
-        $this->exporession .= $value;
+        $this->expression .= $value;
 
         return $this;
     }
@@ -25,16 +25,26 @@ class Expression
 
     public function anything()
     {
-        $this->exporession .= '.*';
+        $this->expression .= '.*';
 
         return $this;
     }
 
     public function maybe($value)
     {
-        $this->exporession .= '('.$value.')?';
+        $this->expression .= '('.$value.')?';
 
         return $this;
+    }
+
+    public function test($value) : bool
+    {
+        return (bool) preg_match($this->__toString(), $value);
+    }
+
+    public function __toString()
+    {
+        return '/'. $this->expression .'/';
     }
 
 }
