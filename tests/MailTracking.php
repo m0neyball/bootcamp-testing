@@ -39,7 +39,10 @@ trait MailTracking
     public function seeEmailTo ($to)
     {
         $email = end ($this->emails);
-        $this->assertArrayHasKey ($to, $email->getTo ());
+        $this->assertArrayHasKey (
+            $to, $email->getTo (),
+            "No email was sent to $to."
+        );
 
         return $this;
     }
