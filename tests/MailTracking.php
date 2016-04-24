@@ -46,6 +46,16 @@ trait MailTracking
         return $this;
     }
 
+    public function seeEmailFrom ($from, Swift_Message $message = null)
+    {
+        $this->assertArrayHasKey (
+            $from, $this->getEmail($message)->getFrom (),
+            "No email was sent from $from."
+        );
+
+        return $this;
+    }
+
     public function addEmail (Swift_Message $email)
     {
         $this->emails[] = $email;
