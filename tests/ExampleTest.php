@@ -28,7 +28,8 @@ class ExampleTest extends TestCase
         $this
             ->seeEmailsSent (2)
             ->seeEmailTo('foo@bar.com')
-            ->seeEmailFrom('bar@foo.com');
+            ->seeEmailFrom('bar@foo.com')
+            ->seeEmailEquals('Hello World');
     }
 }
 
