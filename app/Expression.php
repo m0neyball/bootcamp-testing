@@ -4,6 +4,8 @@ namespace App;
 
 class Expression
 {
+    protected $exporession = '';
+
     public static function make()
     {
         return new static;
@@ -11,7 +13,9 @@ class Expression
 
     public function find($value)
     {
-        return '/'.$value .'/';
+        $this->exporession .= $value;
+
+        return $this;
     }
 
     public function then($value)
@@ -21,11 +25,16 @@ class Expression
 
     public function anything()
     {
-        return '/' . '.*' . '/';
+        $this->exporession .= '.*';
+
+        return $this;
     }
 
     public function maybe($value)
     {
-        return '/('.$value.')?/';
+        $this->exporession .= '('.$value.')?';
+
+        return $this;
     }
+
 }
