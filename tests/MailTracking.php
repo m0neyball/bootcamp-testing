@@ -20,6 +20,8 @@ trait MailTracking
             $this->emails,
             'No emails have been sent.'
         );
+
+        return $this;
     }
 
     public function seeEmailsSent ($count)
@@ -30,6 +32,8 @@ trait MailTracking
             $this->emails,
             "Expected $count emails to have been sent, but $emailSent were."
         );
+
+        return $this;
     }
 
     public function addEmail (Swift_Message $email)
