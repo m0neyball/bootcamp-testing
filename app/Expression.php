@@ -6,48 +6,48 @@ class Expression
 {
     protected $expression = '';
 
-    public static function make()
+    public static function make() : Expression
     {
         return new static;
     }
 
-    public function find($value)
+    public function find(string $value):Expression
     {
         return $this->add($this->sanitize($value));
     }
 
-    public function then($value)
+    public function then(string $value) : Expression
     {
         return $this->find($value);
     }
 
-    public function anything()
+    public function anything() : Expression
     {
         return $this->add('.*');
     }
 
-    public function anythingBut($value)
+    public function anythingBut(string $value) : Expression
     {
         $value = $this->sanitize($value);
 
         return $this->add("(?!$value).*?");
     }
 
-    public function maybe($value)
+    public function maybe(string $value) : Expression
     {
         $value = $this->sanitize($value);
 
         return $this->add("(?:$value)?");
     }
 
-    protected function add($value)
+    protected function add($value) : Expression
     {
         $this->expression .= $value;
 
         return $this;
     }
 
-    protected function sanitize($value)
+    protected function sanitize(string $value) : string
     {
         return preg_quote($value, '/');
     }
@@ -57,12 +57,18 @@ class Expression
         return (bool) preg_match($this->getRegex(), $value);
     }
 
-    public function getRegex()
+    /**
+     * @return string
+     */
+    public function getRegex() : string
     {
         return '/'. $this->expression .'/';
     }
 
-    public function __toString()
+    /**
+     * @return string
+     */
+    public function __toString() : string
     {
         return $this->getRegex();
     }
