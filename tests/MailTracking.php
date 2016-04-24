@@ -37,8 +37,18 @@ trait MailTracking
     protected function seeEmailEquals ($body, Swift_Message $message = null)
     {
         $this->assertEquals (
-            $body, $this->getEmail($message)->getBody (),
+            $body, $this->getEmail ($message)->getBody (),
             "No email with the provided body was sent."
+        );
+
+        return $this;
+    }
+
+    protected function seeEmailContains ($excerpt, Swift_Message $message = null)
+    {
+        $this->assertContains (
+            $excerpt, $this->getEmail ($message)->getBody (),
+            "No email containing the provided body was found."
         );
 
         return $this;
@@ -59,7 +69,7 @@ trait MailTracking
     public function seeEmailTo ($to, Swift_Message $message = null)
     {
         $this->assertArrayHasKey (
-            $to, $this->getEmail($message)->getTo (),
+            $to, $this->getEmail ($message)->getTo (),
             "No email was sent to $to."
         );
 
@@ -69,7 +79,7 @@ trait MailTracking
     public function seeEmailFrom ($from, Swift_Message $message = null)
     {
         $this->assertArrayHasKey (
-            $from, $this->getEmail($message)->getFrom (),
+            $from, $this->getEmail ($message)->getFrom (),
             "No email was sent from $from."
         );
 
@@ -83,13 +93,14 @@ trait MailTracking
 
     protected function getEmail (Swift_Message $message = null)
     {
-        $this->seeEmailWasSent();
-        return $message ? : $this->lastEmail();
+        $this->seeEmailWasSent ();
+
+        return $message ?: $this->lastEmail ();
     }
 
     protected function lastEmail ()
     {
-        return end($this->emails);
+        return end ($this->emails);
     }
 }
 
