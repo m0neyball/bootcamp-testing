@@ -31,7 +31,6 @@ class ExampleTest extends TestCase
     public function it_normalizes_a_string_for_the_cache_key ()
     {
         // =================================================================== 1
-
         /*
         $directive = $this->prophesize (BladeDirective::class);
         $directive
@@ -41,12 +40,9 @@ class ExampleTest extends TestCase
         $response = $directive->reveal ()->foo ('bar');
         $this->assertEquals ('foobar', $response);
          */
-
         // dd($directive);
         // die(var_dump($directive));
-
         // =================================================================== 2
-
         /*
         $cache = new RussianCache;
         $directive = new BladeDirective($cache);
@@ -55,16 +51,32 @@ class ExampleTest extends TestCase
         $directive->setUp($collection);
         $directive->setUp($model);
         */
-
-        $cache = $this->prophesize(RussianCache::class);
+        $cache = $this->prophesize (RussianCache::class);
         $directive = new BladeDirective($cache->reveal ());
         $cache
-            ->has('cache-key')
+            ->has ('cache-key')
             ->shouldBeCalled ();
-        $directive->setUp('cache-key');
+        $directive->setUp ('cache-key');
+    }
 
-
-
+    /**
+     * @test
+     */
+    public function it_normalizes_a_cacheable_model_for_the_cache_key ()
+    {
+        $cache = $this->prophesize (RussianCache::class);
+        $directive = new BladeDirective($cache->reveal ());
+        $cache
+            ->has ('stub-cache-key')
+            ->shouldBeCalled ();
+        $directive->setUp (new ModelStub);
     }
 }
 
+class ModelStub
+{
+    public function getCacheKey ()
+    {
+        return 'stub-cache-key';
+    }
+}
