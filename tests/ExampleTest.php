@@ -25,6 +25,10 @@ class ExampleTest extends TestCase
             $message->to ('foo@bar.com');
             $message->from ('bar@foo.com');
         });
+        Mail::raw ('Hello World', function ($message) {
+            $message->to ('foo@bar.com');
+            $message->from ('bar@foo.com');
+        });
         $this->seeEmailWasSent ();
         $this->seeEmailsSent(2);
     }
