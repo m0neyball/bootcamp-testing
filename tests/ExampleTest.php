@@ -26,6 +26,7 @@ class ExampleTest extends TestCase
             $message->from ('bar@foo.com');
         });
         $this->seeEmailWasSent ();
+        $this->seeEmailsSent(2);
     }
 
     protected function seeEmailWasSent ()
@@ -33,6 +34,16 @@ class ExampleTest extends TestCase
         $this->assertNotEmpty (
             $this->emails,
             'No emails have been sent.'
+        );
+    }
+
+    public function seeEmailsSent ($count)
+    {
+        $emailSent = count($this->emails);
+        $this->assertCount(
+            $count,
+            $this->emails,
+            "Expected $count emails to have been sent, but $emailSent were."
         );
     }
 
