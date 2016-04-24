@@ -32,6 +32,10 @@ class BladeDirective
             return $item->getCacheKey();
         }
 
+        if (is_array($item)) {
+            return md5(implode($item));
+        }
+
         return $item;
     }
 }
