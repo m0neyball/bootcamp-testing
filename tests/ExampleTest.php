@@ -15,22 +15,14 @@ class ExampleTest extends TestCase
     public function testBasicEmailExample ()
     {
         $this
-            ->seeEmailWasNotSent();
-        Mail::raw ('Hello World', function ($message) {
-            $message->to ('foo@bar.com');
-            $message->from ('bar@foo.com');
-        });
-        Mail::raw ('Hello World', function ($message) {
-            $message->to ('foo@bar.com');
-            $message->from ('bar@foo.com');
-        });
-        $this->seeEmailWasSent ();
-        $this
+            ->seeEmailWasNotSent ()
+            ->visit ('/')
+            ->seeEmailWasSent ()
             ->seeEmailsSent (2)
-            ->seeEmailTo('foo@bar.com')
-            ->seeEmailFrom('bar@foo.com')
-            ->seeEmailEquals('Hello World')
-            ->seeEmailContains('Hello');
+            ->seeEmailTo ('foo@bar.com')
+            ->seeEmailFrom ('bar@foo.com')
+            ->seeEmailEquals ('Hello World')
+            ->seeEmailContains ('Hello');
     }
 }
 
