@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -10,12 +9,18 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::get ('/', function () {
+    Mail::raw ('Hello World', function ($message) {
+        $message->to ('foo@bar.com');
+        $message->from ('bar@foo.com');
+    });
+    Mail::raw ('Hello World', function ($message) {
+        $message->to ('foo@bar.com');
+        $message->from ('bar@foo.com');
+    });
 
-Route::get('/', function () {
-    return view('welcome');
+    return view ('welcome');
 });
-
-
-Route::get('feedback', function () {
+Route::get ('feedback', function () {
     return "You're been clicked, punk.";
 });
