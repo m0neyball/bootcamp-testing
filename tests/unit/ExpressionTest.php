@@ -10,10 +10,10 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
     public function it_finds_a_string()
     {
         $regex = Expression::make()->find('www');
-        $this->assertRegExp((string)$regex, 'www');
+        $this->assertTrue($regex->test('www'));
 
         $regex = Expression::make()->then('www');
-        $this->assertRegExp((string)$regex, 'www');
+        $this->assertTrue($regex->test('www'));
     }
 
     /**
@@ -42,8 +42,9 @@ class ExpressionTest extends PHPUnit_Framework_TestCase
      */
     public function it_can_chain_method_calls()
     {
-        $regex = Expression::make()->find('foo')->maybe('bar')->then('biz');
+        $regex = Expression::make()->find('www')->maybe('.')->then('larcasts');
 
-        $this->assertTrue($regex->test('foobarbiz'));
+        $this->assertTrue($regex->test('www.larcasts'));
+        $this->assertFalse($regex->test('wwwXlarcasts'));
     }
 }
