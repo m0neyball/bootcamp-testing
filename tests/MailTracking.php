@@ -34,6 +34,16 @@ trait MailTracking
         return $this;
     }
 
+    protected function seeEmailEquals ($body, Swift_Message $message = null)
+    {
+        $this->assertEquals (
+            $body, $this->getEmail($message)->getBody (),
+            "No email with the provided body was sent."
+        );
+
+        return $this;
+    }
+
     public function seeEmailsSent ($count)
     {
         $emailSent = count ($this->emails);
