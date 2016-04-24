@@ -29,7 +29,8 @@ class ExampleTest extends TestCase
             ->seeEmailsSent (2)
             ->seeEmailTo('foo@bar.com')
             ->seeEmailFrom('bar@foo.com')
-            ->seeEmailEquals('Hello World');
+            ->seeEmailEquals('Hello World')
+            ->seeEmailContains('Hello');
     }
 }
 
