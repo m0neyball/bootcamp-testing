@@ -24,6 +24,9 @@ class BladeDirective
         if (is_object ($item) && method_exists ($item, 'getCacheKey')) {
             return $item->getCacheKey ();
         }
+        if (is_array ($item)) {
+            return md5 (implode ($item));
+        }
 
         return $item;
     }
