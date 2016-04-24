@@ -24,5 +24,47 @@ class ExampleTest extends TestCase
             ->seeEmailEquals ('Hello World')
             ->seeEmailContains ('Hello');
     }
+
+    /**
+     * @test
+     */
+    public function it_normalizes_a_string_for_the_cache_key ()
+    {
+        // =================================================================== 1
+
+        /*
+        $directive = $this->prophesize (BladeDirective::class);
+        $directive
+            ->foo ('bar')
+            ->shouldBeCalled ()
+            ->willReturn ('foobar');
+        $response = $directive->reveal ()->foo ('bar');
+        $this->assertEquals ('foobar', $response);
+         */
+
+        // dd($directive);
+        // die(var_dump($directive));
+
+        // =================================================================== 2
+
+        /*
+        $cache = new RussianCache;
+        $directive = new BladeDirective($cache);
+
+        $directive->setUp('cache-key');
+        $directive->setUp($collection);
+        $directive->setUp($model);
+        */
+
+        $cache = $this->prophesize(RussianCache::class);
+        $directive = new BladeDirective($cache->reveal ());
+        $cache
+            ->has('cache-key')
+            ->shouldBeCalled ();
+        $directive->setUp('cache-key');
+
+
+
+    }
 }
 
