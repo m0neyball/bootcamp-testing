@@ -1,26 +1,20 @@
 <?php
 
+use App\RussianCache;
+use App\BladeDirective;
+
 class DemoTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @test
      */
-    public function test_something()
+    public function it_normalizes_a_string_for_the_cache_key()
     {
-        $directive = $this->prophesize(BladeDirective::class);
+        $cache = $this->prophesize(RussianCache::class);
+        $directive = new BladeDirective($cache->reveal());
 
-        $directive->foo('bar')->shouldBeCalled()->willReturn('foobar');
+        $cache->has('cache-key')->shouldBeCalled();
 
-        $response = $directive->reveal()->foo('bar');
-
-        $this->assertEquals('foobar', $response);
-    }
-}
-
-class BladeDirective
-{
-    public function foo()
-    {
-
+        $directive->setUp('cache-key');
     }
 }
