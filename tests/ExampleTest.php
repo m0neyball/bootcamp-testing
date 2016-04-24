@@ -14,6 +14,8 @@ class ExampleTest extends TestCase
      */
     public function testBasicEmailExample ()
     {
+        $this
+            ->seeEmailWasNotSent();
         Mail::raw ('Hello World', function ($message) {
             $message->to ('foo@bar.com');
             $message->from ('bar@foo.com');
