@@ -25,7 +25,8 @@ class ExampleTest extends TestCase
         $this->seeEmailWasSent ();
         $this
             ->seeEmailsSent (2)
-            ->seeEmailTo('foo@bar.com');
+            ->seeEmailTo('foo@bar.com')
+            ->seeEmailFrom('bar@foo.com');
     }
 }
 
