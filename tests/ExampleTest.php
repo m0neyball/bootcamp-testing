@@ -6,6 +6,8 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ExampleTest extends TestCase
 {
+    use MailTracking;
+
     /**
      * A basic functional test example.
      *
@@ -13,7 +15,14 @@ class ExampleTest extends TestCase
      */
     public function testBasicExample()
     {
+        Mail::raw('Hello world', function($message) {
+            $message->to('foo@bar.com');
+            $message->from('bar@foo.com');
+        });
+
         $this->visit('/')
-             ->see('Laravel 5');
+             ->seeEmailWasSent()
+             ->seeEmailEquals('Hello world')
+             ->seeEmailContains('Hello');
     }
 }
