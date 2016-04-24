@@ -36,11 +36,10 @@ trait MailTracking
         return $this;
     }
 
-    public function seeEmailTo ($to)
+    public function seeEmailTo ($to, Swift_Message $message = null)
     {
-        $email = end ($this->emails);
         $this->assertArrayHasKey (
-            $to, $email->getTo (),
+            $to, $this->getEmail($message)->getTo (),
             "No email was sent to $to."
         );
 
@@ -50,6 +49,17 @@ trait MailTracking
     public function addEmail (Swift_Message $email)
     {
         $this->emails[] = $email;
+    }
+
+    protected function getEmail (Swift_Message $message = null)
+    {
+        $this->seeEmailWasSent();
+        return $message ? : $this->lastEmail();
+    }
+
+    protected function lastEmail ()
+    {
+        return end($this->emails);
     }
 }
 
